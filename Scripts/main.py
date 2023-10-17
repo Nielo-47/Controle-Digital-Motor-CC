@@ -31,15 +31,19 @@ def mostrarValores():
 
 mostrarValores()
 
-# Estado permanente da velocidade
+# Estado permanente da velocidade e da corrente na armadura
 
 # Degrau
 W_ss = (Kf / (Ra * B)) / (Kf**2 / (Ra * B)) * Vn
+Ia_ss = (B/J)/La / (Kf**2 / (La * J)) * Vn
 
 # Rampa e Parabola tendem a infinito
 
 print(
-    f"\nVelocidade no estado permanente com aplicação de degrau, tensão nominal e a vazio\n{W_ss}"
+    f"\nVelocidade no estado permanente com aplicação de degrau, tensão nominal e a vazio\n{W_ss} rad/s"
+)
+print(
+    f"\nCorrente na armadura no estado permanente com aplicação de degrau, tensão nominal e a vazio\n{Ia_ss} A"
 )
 
 
