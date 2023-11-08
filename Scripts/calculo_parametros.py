@@ -1,7 +1,5 @@
 from math import pi
 
-print(pi)
-
 Pmec = 95 * 10**3
 n = 0.913
 Vn = 400
