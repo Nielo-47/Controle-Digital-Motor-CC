@@ -15,6 +15,7 @@ Kf = (Vn - Ian * Ra) / Wn
 B = (Kf * Ian - Cmn) / Wn
 Tm = J / B
 Te = La / Ra
+T = Te / 10
 
 
 def mostrarValores():
@@ -25,6 +26,7 @@ def mostrarValores():
     print("B = ", B)
     print("Te = ", Te)
     print("Tm = ", Tm)
+    print("T = ", T)
 
 
 mostrarValores()
@@ -33,7 +35,7 @@ mostrarValores()
 
 # Degrau
 W_ss = (Kf / (Ra * B)) / (Kf**2 / (Ra * B)) * Vn
-Ia_ss = (B/J)/La / (Kf**2 / (La * J)) * Vn
+Ia_ss = (B / J) / La / (Kf**2 / (La * J)) * Vn
 
 # Rampa e Parabola tendem a infinito
 
@@ -43,5 +45,3 @@ print(
 print(
     f"\nCorrente na armadura no estado permanente com aplicação de degrau, tensão nominal e a vazio\n{Ia_ss} A"
 )
-
-
