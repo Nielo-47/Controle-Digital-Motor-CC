@@ -1,5 +1,7 @@
-gp = 0.007484/poly([0.919407 -1.8997 1], "z","coeff")
-gc = (poly([-0.91411 1], "z","coeff") * poly([-0.91411 1], "z","coeff"))/poly([0 -1 1], "z","coeff")
+gp = poly([0 0.3624], "z","c")/poly([-0.819 1], "z","c")
+a = 0.5
+b = 0.5
+gc = poly([-a 1], "z","coeff")/poly([-1 1 ], "z","coeff")
 //h = poly([-0.91411 1], "z","coeff")
 
 q = gp*gc

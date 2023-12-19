@@ -30,6 +30,8 @@ a21 = Kf * T/J; a22 = 1-T/Tm;
 
 A = [a11 a12; a21 a22]
 
+A = [ 1 - T/Te, -Kf*T/La; Kf * T/J,  1-T/Tm ] 
+
 //Determinando os coeficientes da matriz B
 b11 = T/La; b12 = 0;
 b21 = 0; b22 = -T/J;

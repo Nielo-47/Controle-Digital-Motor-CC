@@ -72,6 +72,7 @@ function [aproximacao] = calcularMinimosQuadrados(sins, sout)
     Xt = X';
     pseudoinv = inv(Xt*X);
     theta = pseudoinv*Xt*Y;
+    disp(theta)
     aproximacao = X*theta
 endfunction
 
@@ -133,7 +134,7 @@ for J=1:length(entradas)
     [W, Ia, t] = calcularSinalDeSaida(entradas(J));
     W_MQ = calcularMinimosQuadrados(entradas(J), W);
     Ia_MQ = calcularMinimosQuadrados(entradas(J), Ia);
-    plotarResultadoDaSimulacao(list(W, Ia),list(W_MQ, Ia_MQ), entradas(J), t, J);
+    //plotarResultadoDaSimulacao(list(W, Ia),list(W_MQ, Ia_MQ), entradas(J), t, J);
 end
 
 
