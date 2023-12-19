@@ -1,6 +1,5 @@
 // Simulação do motor submetido a entradas na forma degrau, PRAS e PRBS com
 // estimação dos parâmetros usando mínimos quadrados
-
 clear
 clc
 
@@ -12,7 +11,6 @@ Wn = 1890 * 3.141592 / 30
 Ra = 0.08
 J = 0.56
 La = 1.4 * 10**-3
-
 Pele = Pmec / n
 Cmn = Pmec / Wn
 Ian = Pele / Vn
@@ -20,10 +18,10 @@ Kf = (Vn - Ian * Ra) / Wn
 B = (Kf * Ian - Cmn) / Wn
 Tm = J / B
 Te = La / Ra
-N = 3000
 
-//Determinando o período de amostragem
+//Determinando o período de amostragem e numero de iterações
 T = Te/10
+N = 3000
 
 //Determinando os coeficientes da matriz A
 a11 = 1 - T/Te; a12 = -Kf*T/La;
