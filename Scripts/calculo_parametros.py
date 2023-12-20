@@ -39,7 +39,7 @@ Ia_ss = (B / J) / La / (Kf**2 / (La * J)) * Vn
 # Rampa e Parabola tendem a infinito
 
 print(
-    f"\nVelocidade no estado permanente com aplicação de degrau, tensão nominal e a vazio\n{W_ss} rad/s"
+    f"\nVelocidade no estado permanente com aplicação de degrau, tensão nominal e a vazio\n{W_ss} rad/s\n{W_ss*30/pi} rpm"
 )
 print(
     f"\nCorrente na armadura no estado permanente com aplicação de degrau, tensão nominal e a vazio\n{Ia_ss} A"
