@@ -17,7 +17,6 @@ Tm = J / B
 Te = La / Ra
 T = Te / 10
 
-
 def mostrarValores():
     print("Pele = ", Pele)
     print("Cmn = ", Cmn)
@@ -45,3 +44,12 @@ print(
 print(
     f"\nCorrente na armadura no estado permanente com aplicação de degrau, tensão nominal e a vazio\n{Ia_ss} A"
 )
+
+Torque = Pmec/W_ss
+print("Torque = ", Torque)
+print("K = ", [0.48, -97.1871] )
+print("Ki = ", -97.6271 )
+print("Ko = [133.0634; 1.89971]")
+
+
+
