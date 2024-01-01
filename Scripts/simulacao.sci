@@ -12,7 +12,6 @@ Ra = 0.08
 J = 0.56
 La = 1.4 * 10**-3
 
-
 Pele = Pmec / n
 Cmn = Pmec / Wn
 Ian = Pele / Vn
@@ -65,6 +64,10 @@ for I=1:N
         A = [a11 a12; a21 a22]
     end
     
+    if (I==2300) // Adicionando carga nominal
+        u(2,1) = 0
+    end 
+    
     x = A*x + B*u
     
     t(I+1,1) = tempo
@@ -79,6 +82,9 @@ plot(t, W, 'r')
 title('Velocidade do eixo' )
 ylabel( 'Velocidade (rad/s)')
 xlabel( 'Tempo (s)')
+colordef("white")
+a=gca().children.children();
+a.thickness = 3
 
 //Plotando o grafico da corrente na armadura
 clf(2)
@@ -87,7 +93,8 @@ plot(t, Ia, 'b')
 title('Corrente na armadura' )
 ylabel( 'Corrente na armadura (A)')
 xlabel( 'Tempo (s)')
-
+a=gca().children.children();
+a.thickness = 3
 
 
 

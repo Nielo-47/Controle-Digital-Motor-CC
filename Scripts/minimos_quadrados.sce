@@ -1,6 +1,5 @@
 // Simulação do motor submetido a entradas na forma degrau, PRAS e PRBS com
 // estimação dos parâmetros usando mínimos quadrados
-clear
 clc
 
 // Definição dos parâmetros do motor
@@ -61,18 +60,17 @@ function [W, Ia, t] = calcularSinalDeSaida(entrada)
     end
 endfunction
 
-function [aproximacao] = calcularMinimosQuadrados(sins, sout)
+function [aproximacao, theta] = calcularMinimosQuadrados(entradas, saidas)
     Y = [];
     X = [];
-    for k = 3 :length(sout) -1
-        Y = [Y;sout(k)];
-        X = [X; -sout(k-1) -sout(k-2) sins(k)]; 
+    for k = 3 :length(saidas) -1
+        Y = [Y;saidas(k)];
+        X = [X; -saidas(k-1) -saidas(k-2) entradas(k)]; 
     end
 
     Xt = X';
     pseudoinv = inv(Xt*X);
     theta = pseudoinv*Xt*Y;
-    disp(theta)
     aproximacao = X*theta
 endfunction
 
@@ -82,6 +80,7 @@ function plotarResultadoDaSimulacao(saidas,saidas_MQ, entrada, t, J)
     cor_entrada = 'g'
 
     //Plotando o grafico da velocidade
+    /*
     clf(J)
     figure(J)
     plot(t(4:length(t)), saidas(1)(4:length(t)), cor_saida)
@@ -90,7 +89,8 @@ function plotarResultadoDaSimulacao(saidas,saidas_MQ, entrada, t, J)
     title('Velocidade do eixo' )
     ylabel('Velocidade (rad/s)')
     xlabel('Tempo (s)')
-    
+    gca().children.children().thickness = 1.5;
+    */
     //Plotando grafico da corrente
     clf(J + 3)
     figure(J + 3)
@@ -100,6 +100,8 @@ function plotarResultadoDaSimulacao(saidas,saidas_MQ, entrada, t, J)
     title('Corrente na armadura')
     ylabel('Corrente (A)')
     xlabel('Tempo (s)')
+    gca().children.children().thickness = 1.5;
+    
 endfunction
 
 //Gerando sinal de entrada degrau
@@ -132,9 +134,14 @@ entradas = list(degrau, pras, prbs)
 
 for J=1:length(entradas)
     [W, Ia, t] = calcularSinalDeSaida(entradas(J));
-    W_MQ = calcularMinimosQuadrados(entradas(J), W);
-    Ia_MQ = calcularMinimosQuadrados(entradas(J), Ia);
-    //plotarResultadoDaSimulacao(list(W, Ia),list(W_MQ, Ia_MQ), entradas(J), t, J);
+    [W_MQ, theta_W] = calcularMinimosQuadrados(entradas(J), W);
+    [Ia_MQ, theta_Ia] = calcularMinimosQuadrados(entradas(J), Ia);
+    disp("Velocidade")
+    disp(theta_W)
+    disp("Corrente")
+    disp(theta_Ia)
+    
+   plotarResultadoDaSimulacao(list(W, Ia),list(W_MQ, Ia_MQ), entradas(J), t, J);
 end
 
 
