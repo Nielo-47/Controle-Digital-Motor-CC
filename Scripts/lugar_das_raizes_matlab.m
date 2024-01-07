@@ -1,48 +1,39 @@
 clc
 
-T = 0.00175;
-gpz = tf([0.0058540, 0, 0],[1, -1.9224928, 0.9337476], T);
-gcz = tf([1, -(0.8 + 0.8), 0.8*0.8], [1, -1, 0], T);
+% Definição dos parâmetros do motor
+Pmec = 95 * 10^3;
+n = 0.913;
+Vn = 400;
+Wn = 1890 * 3.141592 / 30;
+Ra = 0.08;
+J = 0.56;
+La = 1.4 * 10^-3;
+Pele = Pmec / n;
+Cmn = Pmec / Wn;
+Ian = Pele / Vn;
+Kf = (Vn - Ian * Ra) / Wn;
+B = (Kf * Ian - Cmn) / Wn;
+Tm = J / B;
+Te = La / Ra;
+T = Te/10;
 
-amp_sinal = 2;
-div_sinal = 5/10;
-adc_10bits = 1023/5;
-dac_10bits = 5/1023;
-conv_cacc = 600/10;
-ganho_tacogerador = 0.0033 * 60/(2*pi);
+%W/Va
+%F.T. continua 
+gps_w = tf(Kf/(Ra*B),[Te*Tm, Te+Tm, 1 + Kf^2/(Ra*B)])
 
-gz = gpz * amp_sinal * adc_10bits * dac_10bits * conv_cacc; 
-hz = ganho_tacogerador * div_sinal;
-qz = gz*hz;
+% F.T. Discreta
+gpz_w = tf(T^2*Kf/(La*J), [1, -(1-T/Te + 1+T/Tm),(1-T/Te)*(1+T/Tm) + Kf^2*T^2/(La*J)], T)
 
-%zgrid("new")
-%rlocus(qz);
+%controlSystemDesigner('rlocus', gps_w)
+controlSystemDesigner('rlocus', gpz_w)
 
-gcz = tf([1, -0.5], [1, -1], T);
-gz_pi = gz * gcz;
-qz = gz_pi*hz;
-%rlocus(qz);
+%Ia/Va
+%F.T. continua 
+gps_Ia = tf([Tm/Ra, 1/Ra],[Te*Tm, Te+Tm, 1 + Kf^2/(Ra*B)])
 
-gcz = tf([1, -(0.9 + 0.9), 0.9*0.9], [1, -1, 0], T);
-gz_pi = gz * gcz;
-qz = gz_pi*hz;
-rlocus(qz);
+% F.T. discreta
+gpz_Ia = tf([T/La, -(1-T/Tm)*T/La], [1, -(1-T/Te + 1+T/Tm),(1-T/Te)*(1+T/Tm) + Kf^2*T^2/(La*J)], T)
 
-% cond_sinal = 3/14;
-% adc_10bits = 1023/5;
-% conv_cacc = 400/1023;
-% conv_rads_rpm = 60/(2*pi);
-% ganho_tacogerador = 0.007;
-
-% gpz = tf([0.007484], [1 -1.8997 0.91407], T)
-% gcz = tf([1, -1], [1, 0], T)
-
-
-%gpz = tf([1 0 -0.81], [1 -2 0.96], T)
-%gcz = tf([1 -0.7], [1 -1], T)
-
-%zpk(0, [0.9512, 0.9048, 0.8187], 0.0008413);
-%gz = gpz * gcz *adc_10bits * conv_cacc
-%hz = cond_sinal * conv_rads_rpm * ganho_tacogerador;
-
+%controlSystemDesigner('rlocus', gps_Ia)
+%controlSystemDesigner('rlocus', gpz_Ia)
 

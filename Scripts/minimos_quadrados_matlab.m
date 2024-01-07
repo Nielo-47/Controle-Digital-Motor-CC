@@ -5,7 +5,6 @@ clc
 % Definição dos parâmetros do motor
 Pmec = 95 * 10^3
 n = 0.913
-global Vn;
 Vn = 400
 Wn = 1890 * 3.141592 / 30
 Ra = 0.08
