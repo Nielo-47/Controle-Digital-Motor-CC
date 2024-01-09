@@ -80,7 +80,6 @@ function plotarResultadoDaSimulacao(saidas,saidas_MQ, entrada, t, J)
     cor_entrada = 'g'
 
     //Plotando o grafico da velocidade
-    /*
     clf(J)
     figure(J)
     plot(t(4:length(t)), saidas(1)(4:length(t)), cor_saida)
@@ -90,7 +89,7 @@ function plotarResultadoDaSimulacao(saidas,saidas_MQ, entrada, t, J)
     ylabel('Velocidade (rad/s)')
     xlabel('Tempo (s)')
     gca().children.children().thickness = 1.5;
-    */
+    
     //Plotando grafico da corrente
     clf(J + 3)
     figure(J + 3)

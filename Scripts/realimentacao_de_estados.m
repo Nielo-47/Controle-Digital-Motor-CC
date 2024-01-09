@@ -19,15 +19,20 @@ Te = La / Ra;
 T = Te/10;
 
 %Determinando os coeficientes da matriz A
-a11 = 1 - T/Te; a21 = Kf * T/J;
-a12 = -Kf*T/La; a22 = 1-T/Tm;
-
-%Determinando os coeficientes da matriz B
-b1 = -T/La;
-b2 = 0;
+a11 = 1 - T/Te; a12 = -Kf*T/La; 
+a21 = Kf * T/J; a22 = 1-T/Tm;
 
 %Determinando os coeficientes da matriz C
 c1 = 0; c2 = 1;
+
+%Determinando os ganhos do observador
+ko = linsolve([
+    c2*a21+c1*a22, a12*c1-a11*c2; 
+    c1, c2;   
+], [ a12*a21-a11*a22;a11+a22]);
+
+ko1 = ko(1)
+ko2 = ko(2)
 
 %Definindo o polinômio desejado (pólos reais e iguais a 0.5) 
 raiz = 0.5;
@@ -52,19 +57,22 @@ coeff_vetor_k_c = [
     a11-1, a21, c1*a11+c2*a21;
     a12, a22-1, c1*a12+c2*a22;
     b1+c1*b1+c2*b2, b2, 0;
-]
+];
 
 coeff_k_c = [
     k_c(1); 
     k_c(2); 
-    k_c(3)-1
-]
+    k_c(3)-1;
+];
 
 k = linsolve(coeff_vetor_k_c, coeff_k_c);
 
 k1 = k(1)
 k2 = k(2)
 ki = k(3)
+
+
+
 
 %
 % z(-a22+ko2*c2+ko1*c1-a11)
@@ -73,10 +81,6 @@ ki = k(3)
 %ko1(c1) + ko2(c2) = a11 + a22
 %ko1(c2*a21 + c1*a22) + ko2(a12*c1 -a11*c2) = a12*a21 - a11*a22
 
-ko = linsolve([
-    c2*a21+c1*a22, a12*c1-a11*c2; 
-    c1, c2;   
-], [ a12*a21-a11*a22;a11+a22])
 
 % 
 % A = [0, 0, -1;

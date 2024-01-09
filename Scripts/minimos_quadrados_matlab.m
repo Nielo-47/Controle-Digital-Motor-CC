@@ -32,7 +32,7 @@ A = [a11 a12; a21 a22]
 b11 = T/La; b12 = 0;
 b21 = 0; b22 = -T/J;
 
-B = [b11 b12; b21 b22];
+B = [b11 b12; b21 b22]
 
 %Definindo a matriz C
 C = [1 0; 0 1]
@@ -56,17 +56,18 @@ entradas = {degrau, pras};
 
 for J=1:length(entradas)
     [W, Ia, t] = calcularSinalDeSaida(entradas(J), Vn, T);
-    
     [W_MQ, theta_W] = calcularMinimosQuadrados(entradas(J), W);
     [Ia_MQ, theta_Ia] = calcularMinimosQuadrados(entradas(J), Ia);
+
     disp("Velocidade")
     disp(theta_W)
     disp("Corrente")
     disp(theta_Ia)
-    %plotarResultadoDaSimulacao(list(W, Ia),list(W_MQ, Ia_MQ), entradas(J), t, J);
+
+    plotarResultadoDaSimulacao(list(W, Ia),list(W_MQ, Ia_MQ), entradas(J), t, J);
 end
 
-% Definindo funções 
+% Definindo funções
 function [W, Ia, t] = calcularSinalDeSaida(entrada, Vn, T)
     x = [0;0]
     W(1,1) = 0
@@ -84,7 +85,7 @@ function [W, Ia, t] = calcularSinalDeSaida(entrada, Vn, T)
         
         t(I+1,1) = tempo
         Ia(I+1, 1) = x(1,1)
-        W(I+1,1) = x(2,1) 
+        W(I+1,1) = x(2,1)
     end
 end
 
