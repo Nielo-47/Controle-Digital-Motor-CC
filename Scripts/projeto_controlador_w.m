@@ -6,21 +6,20 @@ gpz = tf([0.0058540, 0, 0],[1, -1.9224928, 0.9337476], T);
 a = 0.9;
 b = a;
 gpid = tf([1, -(a + b), a*b], [1, -1, 0], T);
-pi = 3.1415
+pi = 3.1415;
 gpi = tf([1, -a], [1, -1], T);
 
 amp_sinal = 2;
 div_sinal = 5/10;
 adc_10bits = 1023/5;
-dac_10bits = 5/1023;
+dac_10bits = Vn/1023;
 
-conv_cacc = 600/10;
 ganho_tacogerador = 0.0033 * 60/(2*pi);
 
-gz = gpz * amp_sinal * adc_10bits * dac_10bits * conv_cacc * gpi;  
+gz = gpz * adc_10bits * dac_10bits * gpi;
 hz = ganho_tacogerador * div_sinal;
 qz = gz*hz;
-ãocontrolSystemDesigner('rlocus', qz);
+controlSystemDesigner('rlocus', qz);
 
 %zgrid("new")
 %rlocus(qz);
