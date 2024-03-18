@@ -74,3 +74,5 @@ mostrarValores()
 # )
 
 # print((-1 + T / Te) * (-1 + T / Tm) + (Kf**2) * T**2 / (La * J))
+
+print((1 - T/Tm)*T/La)
