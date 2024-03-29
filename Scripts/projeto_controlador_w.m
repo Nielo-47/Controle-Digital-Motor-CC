@@ -11,19 +11,11 @@ gpi = tf([1, -a], [1, -1], T);
 
 div_sinal = 5/10;
 adc_10bits = 1023/5;
-<<<<<<< HEAD
-dac_10bits = 400/1023;
-=======
 dac_10bits = Vn/1023;
->>>>>>> 24efda25167734cb1296ef88d4a639ecebd67c3e
 
 ganho_tacogerador = 0.0033 * 60/(2*pi);
 
-<<<<<<< HEAD
-gz = gpz *  adc_10bits * dac_10bits * gpi;
-=======
 gz = gpz * adc_10bits * dac_10bits * gpi;
->>>>>>> 24efda25167734cb1296ef88d4a639ecebd67c3e
 hz = ganho_tacogerador * div_sinal;
 qz = gz*hz;
 controlSystemDesigner('rlocus', qz);
