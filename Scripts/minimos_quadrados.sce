@@ -62,12 +62,12 @@ endfunction
 function [aproximacao, theta] = calcularMinimosQuadrados(entradas, saidas)
     Y = [];
     X = [];
-    for k = 4 :length(saidas) -1
-        Y = [Y; saidas(k)];
-        X = [X; -saidas(k-1) -saidas(k-2) entradas(k) entradas(k-1)]; 
+    for k = 1 :length(saidas) -3
+        Y = [Y;saidas(k+2)];
+        X = [X; -saidas(k+1) -saidas(k) entradas(k) entradas(k + 1)];
     end
 
-    pseudoinv = pinv(X);
+    pseudoinv = pinv(X)
     theta = pseudoinv*Y;
     aproximacao = X*theta
 endfunction

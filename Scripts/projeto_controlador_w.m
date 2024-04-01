@@ -9,7 +9,6 @@ gpid = tf([1, -(a + b), a*b], [1, -1, 0], T);
 pi = 3.1415;
 gpi = tf([1, -a], [1, -1], T);
 
-amp_sinal = 2;
 div_sinal = 5/10;
 adc_10bits = 1023/5;
 dac_10bits = Vn/1023;
