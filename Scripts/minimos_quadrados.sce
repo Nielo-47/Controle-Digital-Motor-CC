@@ -37,7 +37,6 @@ B = [b11 b12; b21 b22];
 //Definindo a matriz C
 C = [1 0; 0 1]
 
-
 // Definindo funções 
 function [W, Ia, t] = calcularSinalDeSaida(entrada)
     x = [0;0]
@@ -49,11 +48,11 @@ function [W, Ia, t] = calcularSinalDeSaida(entrada)
 
     for I=1:length(entrada)
         tempo = tempo + T
-        
+
         u(1,1) = entrada(I)
-       
+
         x = A*x + B*u
-        
+
         t(I+1,1) = tempo
         Ia(I+1, 1) = x(1,1)
         W(I+1,1) = x(2,1) 
@@ -63,14 +62,13 @@ endfunction
 function [aproximacao, theta] = calcularMinimosQuadrados(entradas, saidas)
     Y = [];
     X = [];
-    for k = 3 :length(saidas) -1
-        Y = [Y;saidas(k)];
-        X = [X; -saidas(k-1) -saidas(k-2) entradas(k)]; 
+    for k = 4 :length(saidas) -1
+        Y = [Y; saidas(k)];
+        X = [X; -saidas(k-1) -saidas(k-2) entradas(k) entradas(k-1)]; 
     end
 
-    Xt = X';
-    pseudoinv = inv(Xt*X);
-    theta = pseudoinv*Xt*Y;
+    pseudoinv = pinv(X);
+    theta = pseudoinv*Y;
     aproximacao = X*theta
 endfunction
 
@@ -140,7 +138,7 @@ for J=1:length(entradas)
     disp("Corrente")
     disp(theta_Ia)
     
-   plotarResultadoDaSimulacao(list(W, Ia),list(W_MQ, Ia_MQ), entradas(J), t, J);
+   //plotarResultadoDaSimulacao(list(W, Ia),list(W_MQ, Ia_MQ), entradas(J), t, J);
 end
 
 
