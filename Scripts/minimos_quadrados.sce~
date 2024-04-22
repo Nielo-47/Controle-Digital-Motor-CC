@@ -127,7 +127,7 @@ for K = 1:length(prbs)
 end
 
 // Calculando e plotando simulação
-entradas = list( prbs)
+entradas = list(degrau, pras, prbs)
 
 for J=1:length(entradas)
     [W, Ia, t] = calcularSinalDeSaida(entradas(J));
@@ -138,7 +138,7 @@ for J=1:length(entradas)
     disp("Corrente")
     disp(theta_Ia)
     
-   plotarResultadoDaSimulacao(list(W, Ia),list(W_MQ, Ia_MQ), entradas(J), t, J);
+   //plotarResultadoDaSimulacao(list(W, Ia),list(W_MQ, Ia_MQ), entradas(J), t, J);
 end
 
 
