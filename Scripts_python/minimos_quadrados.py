@@ -146,3 +146,8 @@ for i, entrada in enumerate(entradas):
     print(f"({nomes[i]})\n", theta_Ia, "\n")
 
 plt.show()
+
+print("Coeficientes MQ para estimativa de corrente por saída de velocidade\n(PRBS)")
+W_Ia, theta = calcularMinimosQuadrados(Ia, W)
+
+print(theta)
