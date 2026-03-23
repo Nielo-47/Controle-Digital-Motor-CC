@@ -2,6 +2,8 @@
 
 Projeto de modelagem, identificação e controle digital de um motor de corrente contínua (CC) de 95 kW, desenvolvido como trabalho acadêmico. O projeto contempla a obtenção do modelo matemático do motor, identificação de parâmetros via Mínimos Quadrados, projeto de controladores nos planos contínuo (s) e discreto (z), e simulações utilizando MATLAB/Simulink, Scilab/Xcos e Python.
 
+Para ver os resultados das simulações e análise, acesse o [documento do trabalho.](https://docs.google.com/document/d/10vdmbsnsIYc34fiDCt3tkEhxyy3bf9GkYrQg-X2g6mA/edit?usp=sharing)
+
 ---
 
 ## Sumário
